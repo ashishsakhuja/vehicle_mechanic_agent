@@ -1,0 +1,11 @@
+.env
+__pycache__/
+.DS_Store
+.pdf
+**/*.pdf
+.idea
+*.iml
+*.pyc
+*.pyo
+*.pyd
+*.pkl

@@ -1,0 +1,177 @@
+parse_problem_task:
+  description: |
+    Take the user’s raw input "{problem}" and return a cleaned, concise summary
+    of the issue that needs to be solved.
+    Do not change meaning, add context, or include quotes—only clean up the wording.
+    Output exactly one sentence.
+  expected_output: |
+    One concise sentence summarizing the user’s problem.
+  agent: text_parser
+
+find_manual_sql_task:
+  description: |
+    From the summary in "{context.parse_problem_task}", extract the vehicle make, model, and year.
+    Emit exactly one DuckDB SQL statement in this form:
+
+    ```sql
+    SELECT path
+      FROM manuals
+     WHERE make='Toyota'
+       AND model='Camry'
+       AND year=2011;
+    ```
+
+    Do not reference any other columns or add any extra filters.
+  expected_output: |
+    ```sql
+    SELECT path
+      FROM manuals
+     WHERE make='Toyota'
+       AND model='Camry'
+       AND year=2011;
+    ```
+  agent: manual_sql
+  depends_on:
+    - parse_problem_task
+
+
+lookup_manual_task:
+  description: |
+    Using the SQL from "{context.find_manual_sql_task}", load and chunk the returned PDF(s)
+    and retrieve the most relevant passages for "{context.parse_problem_task}".
+    Return a Markdown-formatted excerpt containing that section.
+  expected_output: |
+    A Markdown excerpt from the manual with the relevant section.
+  agent: manual_qa_agent
+  depends_on:
+    - find_manual_sql_task
+
+generate_solution_task:
+  description: |
+    Given the summary "{context.parse_problem_task}" and manual excerpt
+    "{context.lookup_manual_task}", produce a detailed, step-by-step solution.
+    - Numbered steps
+    - List required tools and materials
+    - Include safety tips and troubleshooting notes
+  expected_output: |
+    A Markdown step-by-step guide.
+  agent: mechanic_expert
+  depends_on:
+    - parse_problem_task
+    - lookup_manual_task
+
+scrape_parts_task:
+  description: |
+    From the solution steps (“{context.generate_solution_task}”), extract
+    all tools and materials mentioned.  
+    **For each item**:
+    1. Invoke the `parts_scraper` tool *with exactly that item’s name*.  
+    2. Take the `amazon`, `autozone` and `oreilly` URLs *directly* from the tool’s output.  
+    3. Format them as markdown links, annotating which is “Cheapest”, “Highest rated” or “Alternative”.  
+
+    Once you’ve done that for every part/tool, invoke the `youtube_search` tool:
+    ```yaml
+    Action: youtube_search
+    Action Input: {"query": "{problem}"}
+    ```
+    and embed the returned YouTube URL *verbatim* under an “Additional resources” heading.
+
+  expected_output: |
+    A markdown list of clickable links **only** using the URLs the tools returned, plus an “Additional resources” section with the YouTube URL.
+  agent: parts_scraper_agent
+  depends_on:
+    - generate_solution_task
+
+enrichment_task:
+  description: |
+    Enrich the solution from "{context.generate_solution_task}" with additional context:
+    - Analyze the solution and problem "{problem}" and determine estimated time to complete and total cost.
+    - Add sentence on estimated price for materials/tools (overestimate this number).
+    - Add sentence on estimated time to complete the repair.
+    - Add sentence on time frame or mileage for when the parts need to be replaced or changed.
+  expected_output: |
+    A Markdown document with enriched content, explicitly mention estimated time to complete and total cost at the top.
+  agent: mechanic_supervisor
+  depends_on:
+    - generate_solution_task
+
+format_guide_task:
+  description: |
+    Format the enriched solution from "{context.enrichment_task}" and "{context.scrape_parts_task}"into a structured JSON format.
+    Ensure it includes:
+    - Title
+    - Steps
+    - Tools and materials
+    - Safety tips
+    - Troubleshooting notes
+    - Estimated time to complete
+    - Total cost of parts/materials/tools
+  expected_output: |
+    A STRUCTURED JSON OUTPUT EXACTLY IN THIS FORMAT:
+    
+    Ensure the solution is correct, comprehensive, and follows best practices for automotive repairs. 
+    Convert Markdown formatted solution into a structured JSON format like this:
+    {
+    "title": "Solution Title",
+        "Estimated_Time": "___ hours/minutes",
+        "Needs to be replaced/changed in: "___ miles or ___ months",
+        "Estimated_Cost for tools/materials": "___ dollars",
+        "Estimated_Cost for Part(s)": "___ dollars",
+        "Tools": ["Tool1", "Tool2", ...],
+        "materials": ["Material1", "Material2", ...],
+        "steps": [
+            {
+                "step_number": 1,
+                "description": "Step description",
+                "tools_needed": ["Tool1", "Tool2"],
+                "materials_needed": ["Material1"],
+                "safety_tips": ["Safety tip 1", "Safety tip 2"],
+                "troubleshooting_notes": ["Troubleshooting note 1"]
+            },
+            {
+                "step_number": 2,
+                "description": "Next step description",
+                "tools_needed": ["Tool3"],
+                "materials_needed": ["Material2"],  
+                "safety_tips": ["Safety tip 3"],
+                "troubleshooting_notes": []
+            }
+            ...
+        ],
+        "Looking for tools and materials?": [
+            {
+                 "Tool1": [
+                    "https://www.amazon.com/..." - Cheapest,
+                    "https://www.autozone.com/..." - Highest rated
+                    "https://www.oreillyauto.com/..." - Alternative
+                    ],
+                 "Tool2": [
+                    "https://www.amazon.com/..." - Alternative,
+                    "https://www.autozone.com/..." - Highest rated, 
+                    "https://www.oreillyauto.com/..." - Cheapest,
+                    ],
+                 "Tool...": [
+                    "https://www.autozone.com/..." - Highest rated,
+                    "https://www.oreillyauto.com/..." - Cheapest,
+                    "https://www.amazon.com/..." - Alternative
+                    ],
+                 "Material1": [
+                    "https://www.oreillyauto.com/..." - Cheapest,
+                    "https://www.autozone.com/..." - Highest rated,
+                    "https://www.amazon.com/..." - Alternative
+                    ],
+                 ...
+            }
+        ],
+        "Additional resources": [
+            {
+                "YouTube Video Guide": "https://www.youtube.com/watch?v=example"
+                "Free vehicle manuals": "https://charm.li/"
+                "Free vehicle repair guides": "https://www.carcarekiosk.com/"
+            }
+            ],
+        "summary": "Overall summary of the solution"
+  agent: formatter_agent
+  depends_on:
+    - enrichment_task
+
