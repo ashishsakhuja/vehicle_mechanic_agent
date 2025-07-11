@@ -106,8 +106,10 @@ format_guide_task:
     - Troubleshooting notes
     - Estimated time to complete
     - Total cost of parts/materials/tools
+    
+    Make sure you use the exact links for youtube and parts/tools as provided in the scraped output.
   expected_output: |
-    A STRUCTURED JSON OUTPUT EXACTLY IN THIS FORMAT:
+    A **FULL** STRUCTURED JSON OUTPUT EXACTLY IN THIS FORMAT:
     
     Ensure the solution is correct, comprehensive, and follows best practices for automotive repairs. 
     Convert Markdown formatted solution into a structured JSON format like this:

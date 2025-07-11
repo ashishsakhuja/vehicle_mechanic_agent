@@ -64,7 +64,7 @@ class ManualQATool(BaseTool):
 class SQLManualTool(BaseTool):
     name: str = Field(
         "sql_manual",
-        description="Run a SELECT against manuals.duckdb to find PDF paths."
+        description="Run a SELECT against manuals2.duckdb to find PDF paths."
     )
     description: str = Field(
         "DuckDB SELECT -> CSV of results",

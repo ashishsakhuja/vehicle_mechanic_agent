@@ -7,7 +7,7 @@ import duckdb
 # Adjust these paths to match your project layout:
 ROOT     = Path(__file__).resolve().parent
 CSV_PATH = ROOT / "charm_manifest.csv"
-DB_PATH  = ROOT / "knowledge" / "manuals.duckdb"
+DB_PATH  = ROOT / "knowledge" / "manuals2.duckdb"
 
 def setup_database(csv_path: Path, db_path: Path):
     # ensure output folder exists
