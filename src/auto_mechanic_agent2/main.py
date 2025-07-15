@@ -19,7 +19,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'problem': 'how to add new steering wheel fluid in a 2014 Toyota Tacoma?',
+        'problem': str('how to add new steering wheel fluid in a 2014 Toyota Tacoma?')
     }
 
     try:
