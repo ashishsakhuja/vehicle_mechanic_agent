@@ -25,6 +25,8 @@ def run():
     try:
         result = AutoMechanicAgent().crew().kickoff(inputs=inputs)
         print(result)
+        from crew import crew
+        return result['text']
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
@@ -70,3 +72,7 @@ def test():
 
 if __name__ == "__main__":
     run()
+
+
+# npx copilotkit@latest init
+#
