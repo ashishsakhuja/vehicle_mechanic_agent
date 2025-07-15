@@ -6,8 +6,8 @@ from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
 from dotenv import load_dotenv
 import logging
-from auto_mechanic_agent2.tools.custom_tool import SQLManualTool, ManualQATool, PartsScraperTool, AdditionalResourcesTool
-from knowledge.vehicle_knowledge_source import ManualIndex
+from auto_mechanic_agent2.tools.custom_tool import SQLManualTool, ManualQATool, PartsScraperTool
+from auto_mechanic_agent2.knowledge.vehicle_knowledge_source import ManualIndex
 
 load_dotenv()
 
@@ -22,7 +22,6 @@ class AutoMechanicAgent:
     tools = [
         SQLManualTool(),
         PartsScraperTool(),
-        AdditionalResourcesTool(),
     ]
 
     def __init__(self):
@@ -149,7 +148,7 @@ class AutoMechanicAgent:
     def scrape_parts_task(self) -> Task:
         return Task(
             config=self.tasks_config["scrape_parts_task"],
-            tools=[PartsScraperTool(), AdditionalResourcesTool()],
+            tools=[PartsScraperTool()],
         )
 
     @task

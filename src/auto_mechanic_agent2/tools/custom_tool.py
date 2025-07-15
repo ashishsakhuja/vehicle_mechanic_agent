@@ -10,7 +10,9 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_community.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
-from knowledge.vehicle_knowledge_source import ManualIndex
+import json
+import httpx
+from auto_mechanic_agent2.knowledge.vehicle_knowledge_source import ManualIndex
 
 
 # ──────────────────────────────── Manual Q&A Tool ────────────────────────────────
@@ -115,24 +117,3 @@ class PartsScraperTool(BaseTool):
             "autozone": f"https://www.autozone.com/searchresult?searchText={q}",
             "oreilly":  f"https://www.oreillyauto.com/search?q={q}"
         }
-
-# ────────────────────────────── Youtube Search Tool ──────────────────────────────
-
-class AdditionalResourcesTool(BaseTool):
-    name: str = Field(
-        "youtube_search",
-        description="Search for YouTube videos related to a given query."
-    )
-    description: str = Field(
-        "A search query → YouTube video URLs",
-        description="What this tool does"
-    )
-
-    def _run(self, query: str) -> Dict[str, str]:
-        q = quote_plus(query)
-        return {
-            "youtube": f"https://www.youtube.com/results?search_query={q}"
-        }
-
-    async def _arun(self, *args: Any, **kwargs: Any) -> Dict[str, str]:
-        raise NotImplementedError("YoutubeSearchTool does not support async.")

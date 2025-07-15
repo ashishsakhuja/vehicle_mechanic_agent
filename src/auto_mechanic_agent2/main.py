@@ -14,19 +14,18 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
+
 def run():
     """
     Run the crew.
     """
     inputs = {
-        'problem': str('how to add new steering wheel fluid in a 2014 Toyota Tacoma?')
+        'problem': str('how to add new steering wheel fluid in a 2014 Toyota Corolla?')
     }
 
     try:
         result = AutoMechanicAgent().crew().kickoff(inputs=inputs)
         print(result)
-        from crew import crew
-        return result['text']
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 

@@ -69,15 +69,8 @@ scrape_parts_task:
     2. Take the `amazon`, `autozone` and `oreilly` URLs *directly* from the tool’s output.  
     3. Format them as markdown links, annotating which is “Cheapest”, “Highest rated” or “Alternative”.  
 
-    Once you’ve done that for every part/tool, invoke the `youtube_search` tool:
-    ```yaml
-    Action: youtube_search
-    Action Input: {"query": "{problem}"}
-    ```
-    and embed the returned YouTube URL *verbatim* under an “Additional resources” heading.
-
   expected_output: |
-    A markdown list of clickable links **only** using the URLs the tools returned, plus an “Additional resources” section with the YouTube URL.
+    A markdown list of clickable links **only** using the URLs the tools returned, plus an “Additional resources” section.
   agent: parts_scraper_agent
   depends_on:
     - generate_solution_task
@@ -117,6 +110,7 @@ format_guide_task:
     "title": "Solution Title",
         "Estimated_Time": "___ hours/minutes",
         "Needs to be replaced/changed in: "___ miles or ___ months",
+        "Difficulty rating": "___ out of 10",
         "Estimated_Cost for tools/materials": "___ dollars",
         "Estimated_Cost for Part(s)": "___ dollars",
         "Tools": ["Tool1", "Tool2", ...],
@@ -166,8 +160,6 @@ format_guide_task:
             }
         ],
         "Additional resources": [
-            {
-                "YouTube Video Guide": "https://www.youtube.com/watch?v=example"
                 "Free vehicle manuals": "https://charm.li/"
                 "Free vehicle repair guides": "https://www.carcarekiosk.com/"
             }

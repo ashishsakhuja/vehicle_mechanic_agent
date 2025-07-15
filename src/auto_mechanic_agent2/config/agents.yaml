@@ -116,9 +116,7 @@ parts_scraper_agent:
     must embed *exactly* the three URLs (`amazon`, `autozone`, `oreilly`)
     from the tool’s output as markdown links—do **not** hard-code or invent any
     other links.
-    
-    You also are a YouTube lookup agent.  Given the original problem string, you
-    will call the `youtube_search` tool and embed *exactly* the URL it returns.
+
   goal: |
     For each part/tool, retrieve its URLs via the tool and output them
     verbatim in markdown. Use the tool output directly; do not guess or fabricate URL.
