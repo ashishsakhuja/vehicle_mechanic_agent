@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Toyota Expert Mechanic</title>
+
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Babel (dev only) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js" data-presets="env,react"></script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+
+<body class="relative">
+  <!-- Fullscreen background video -->
+  <video
+    autoplay muted loop
+    class="fixed inset-0 w-full h-full object-cover"
+  >
+    <source
+      src="https://player.vimeo.com/external/371433846.sd.mp4?s=236d8a8c56c3abe0b3fb1e75c05a8c2e1adceef0&profile_id=164&oauth2_token_id=57447761"
+      type="video/mp4"
+    />
+  </video>
+
+  <!-- React mount point sits above the video -->
+  <div id="root" class="relative z-10"></div>
+
+  <!-- Your bundled script (or Babel entry in dev) -->
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

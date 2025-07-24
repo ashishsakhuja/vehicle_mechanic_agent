@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: toyota-mechanic-agent
+    runtime: python
+    buildCommand: "pip install -r requirements.txt && npm install --prefix ui && npm run build --prefix ui"
+    startCommand: "python server.py"
+    envVars:
+      - key: PORT
+        value: 5000
+    plan: free
+    buildFilter:
+      paths:
+        - server.py
+        - requirements.txt
+        - ui/**
+        - render.yaml

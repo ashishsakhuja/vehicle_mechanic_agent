@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.py",
+      "use": "@vercel/python",
+      "config": {
+        "zeroConfig": false
+      }
+    },
+    {
+      "src": "ui/dist/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/query",
+      "methods": ["POST"],
+      "dest": "server.py"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|map))",
+      "headers": { "Cache-Control": "public,max-age=31536000,immutable" },
+      "dest": "/ui/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/ui/dist/index.html"
+    }
+  ]
+}

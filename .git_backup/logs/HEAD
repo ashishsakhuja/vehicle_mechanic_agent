@@ -1,0 +1,39 @@
+0000000000000000000000000000000000000000 fc7a9d3cada58785bb1378b30a414fd7f694fed1 Ashish Sakhuja <axs7262@psu.edu> 1752193000 -0400	commit (initial): Initial commit
+fc7a9d3cada58785bb1378b30a414fd7f694fed1 0000000000000000000000000000000000000000 Ashish Sakhuja <axs7262@psu.edu> 1752193007 -0400	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 fc7a9d3cada58785bb1378b30a414fd7f694fed1 Ashish Sakhuja <axs7262@psu.edu> 1752193007 -0400	Branch: renamed refs/heads/master to refs/heads/main
+fc7a9d3cada58785bb1378b30a414fd7f694fed1 8f27d6cc6adb9dab4783808378aaa67bbfabd0fb Ashish Sakhuja <axs7262@psu.edu> 1752193735 -0400	commit: Updated files
+8f27d6cc6adb9dab4783808378aaa67bbfabd0fb 88d7566dd53465a27c4ec53724d5d0783f58b2bd Ashish Sakhuja <axs7262@psu.edu> 1752510536 -0400	commit: Initial commit: UI
+88d7566dd53465a27c4ec53724d5d0783f58b2bd 3b0c665deb663750d120477e6546ae2f9aac97a4 Ashish Sakhuja <axs7262@psu.edu> 1752591087 -0400	commit: uv.lock
+3b0c665deb663750d120477e6546ae2f9aac97a4 4c82aa53bc7d6b38c1d36288b33e33b92bf2c710 Ashish Sakhuja <axs7262@psu.edu> 1752592965 -0400	commit: updated main
+4c82aa53bc7d6b38c1d36288b33e33b92bf2c710 ae7e6a9a7ae75d479077e38027f9f32e5f76e11b Ashish Sakhuja <axs7262@psu.edu> 1752595892 -0400	commit: updated main
+ae7e6a9a7ae75d479077e38027f9f32e5f76e11b 3dcfd0547decd111f167b60f390b15f25e917554 Ashish Sakhuja <axs7262@psu.edu> 1752607568 -0400	commit: Updates
+3dcfd0547decd111f167b60f390b15f25e917554 3dcfd0547decd111f167b60f390b15f25e917554 Ashish Sakhuja <axs7262@psu.edu> 1752710525 -0400	checkout: moving from main to pinecone-approach
+3dcfd0547decd111f167b60f390b15f25e917554 d8a9c17e3800525155123c8c30968e64dcd60979 Ashish Sakhuja <axs7262@psu.edu> 1752710632 -0400	commit: Initial Commit: PINECONE
+d8a9c17e3800525155123c8c30968e64dcd60979 34435338500eb61f19c1b855dd4238d14387cdcc Ashish Sakhuja <axs7262@psu.edu> 1752847759 -0400	commit: Updated for pinecone
+34435338500eb61f19c1b855dd4238d14387cdcc fcae76ec35288b26a5352f3127867d7bf4a86c28 Ashish Sakhuja <axs7262@psu.edu> 1752848464 -0400	commit: Updated uv.lock
+fcae76ec35288b26a5352f3127867d7bf4a86c28 63c575380ef0d4ee55516a3cf28596f8b9067168 Ashish Sakhuja <axs7262@psu.edu> 1753104628 -0400	commit: Updated
+63c575380ef0d4ee55516a3cf28596f8b9067168 f8fa27b17468b5fe3f026b076f1f97261208808a Ashish Sakhuja <axs7262@psu.edu> 1753104662 -0400	commit: Updated
+f8fa27b17468b5fe3f026b076f1f97261208808a 84e42f15c05638704bbd699bcc98ab6c02301581 Ashish Sakhuja <axs7262@psu.edu> 1753117663 -0400	commit: React UI
+84e42f15c05638704bbd699bcc98ab6c02301581 5e49896123c9e3888b6626be8265e247f3ef576b Ashish Sakhuja <axs7262@psu.edu> 1753191802 -0400	commit: updated pyproject.toml
+5e49896123c9e3888b6626be8265e247f3ef576b aebb3d756e2186be1695215f3110d1171757dae4 Ashish Sakhuja <axs7262@psu.edu> 1753192322 -0400	commit: uvlock
+aebb3d756e2186be1695215f3110d1171757dae4 5d6c6b9b63f91313c46799b3626e5a28aff1338f Ashish Sakhuja <axs7262@psu.edu> 1753196031 -0400	commit: Updated UI and tasks
+5d6c6b9b63f91313c46799b3626e5a28aff1338f e01dfce278c2f13b535c8021f205c6b9ec7685d8 Ashish Sakhuja <axs7262@psu.edu> 1753197982 -0400	commit: Updated UI for logo and links
+e01dfce278c2f13b535c8021f205c6b9ec7685d8 4704e50b3134e299e1dec4cbc6b5ef32faf31c03 Ashish Sakhuja <axs7262@psu.edu> 1753200941 -0400	commit: vercel
+4704e50b3134e299e1dec4cbc6b5ef32faf31c03 7b91ff53c2e0cfa5dd8e7e43ce6e422f8446d2db Ashish Sakhuja <axs7262@psu.edu> 1753201663 -0400	commit: added requirements.txt
+7b91ff53c2e0cfa5dd8e7e43ce6e422f8446d2db 1417477d01512e03b09a8e82b6bbc230003c6312 Ashish Sakhuja <axs7262@psu.edu> 1753201989 -0400	commit: updated for flask
+1417477d01512e03b09a8e82b6bbc230003c6312 b5d14e930a5ab2c0e9d457b6a3a474d3ed619cda Ashish Sakhuja <axs7262@psu.edu> 1753202635 -0400	commit: updated
+b5d14e930a5ab2c0e9d457b6a3a474d3ed619cda 9c47d7f8755608e1668b04ed553ea88fddd52d55 Ashish Sakhuja <axs7262@psu.edu> 1753202803 -0400	commit: updated
+9c47d7f8755608e1668b04ed553ea88fddd52d55 66a86fac11efac1f1327b112a2dc30d4172c25e0 Ashish Sakhuja <axs7262@psu.edu> 1753203134 -0400	commit: updated
+66a86fac11efac1f1327b112a2dc30d4172c25e0 5f6e70c1b99c1ec277b7cc1c5fe37d39ba8a0693 Ashish Sakhuja <axs7262@psu.edu> 1753203394 -0400	commit: updated
+5f6e70c1b99c1ec277b7cc1c5fe37d39ba8a0693 153e0cbc7b965b6fd1089e3f28c57d82d39b2493 Ashish Sakhuja <axs7262@psu.edu> 1753203529 -0400	commit: updated for flask
+153e0cbc7b965b6fd1089e3f28c57d82d39b2493 1b2f3ee825a8f934baf4b3c4d8b98b82900972e0 Ashish Sakhuja <axs7262@psu.edu> 1753203771 -0400	commit: updated
+1b2f3ee825a8f934baf4b3c4d8b98b82900972e0 09a394a4fb756269d092cc26bd0b4c6691f103e5 Ashish Sakhuja <axs7262@psu.edu> 1753203882 -0400	commit: updated for render
+09a394a4fb756269d092cc26bd0b4c6691f103e5 66f307e35e966046a0c1afaa7b43d57608acd962 Ashish Sakhuja <axs7262@psu.edu> 1753204237 -0400	commit: updated
+66f307e35e966046a0c1afaa7b43d57608acd962 b34a126ed100ba3ff0221ec9807ba9ddf945a8fb Ashish Sakhuja <axs7262@psu.edu> 1753204258 -0400	commit: updated
+b34a126ed100ba3ff0221ec9807ba9ddf945a8fb 1f70615c530eab0e292bad9589b5f203cd11e875 Ashish Sakhuja <axs7262@psu.edu> 1753204891 -0400	commit: updated for langchain
+1f70615c530eab0e292bad9589b5f203cd11e875 671ef1fc7987da29b15a0e453bf73c989ca9952a Ashish Sakhuja <axs7262@psu.edu> 1753209586 -0400	commit: updated
+671ef1fc7987da29b15a0e453bf73c989ca9952a 714bd4972f25e1e7e8ac0ce7e8141f14a7c7cd1f Ashish Sakhuja <axs7262@psu.edu> 1753309488 -0400	commit: Updated for venv fixes
+714bd4972f25e1e7e8ac0ce7e8141f14a7c7cd1f b7ab9270517988c41babf37a162dcf8942645b68 Ashish Sakhuja <axs7262@psu.edu> 1753310906 -0400	commit: updated
+b7ab9270517988c41babf37a162dcf8942645b68 59d3028fc07df8db1a849b7e5b13c0a9b35d95c3 Ashish Sakhuja <axs7262@psu.edu> 1753310952 -0400	commit: updated
+59d3028fc07df8db1a849b7e5b13c0a9b35d95c3 086c0b74577ca4f5033d8352d6067bb8ca1927ae Ashish Sakhuja <axs7262@psu.edu> 1753312339 -0400	commit: update new routes
+086c0b74577ca4f5033d8352d6067bb8ca1927ae 082cbb34be51905c1a5b7b7f116aaf8966d8b4c2 Ashish Sakhuja <axs7262@psu.edu> 1753313302 -0400	commit: removed req

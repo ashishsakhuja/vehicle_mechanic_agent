@@ -1,0 +1,28 @@
+[project]
+name = "auto_mechanic_agent2"
+version = "0.1.0"
+description = "auto_mechanic_agent2 using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<4"
+dependencies = [
+  "aiohttp==3.9.5",
+  "crewai[tools]==0.148.0",
+  "langchain-pinecone>=0.2.0",
+  "pinecone>=6.0",
+  "flask",
+  "flask-cors",
+]
+
+[project.scripts]
+auto_mechanic_agent2 = "auto_mechanic_agent2.main:run"
+run_crew = "auto_mechanic_agent2.main:run"
+train = "auto_mechanic_agent2.main:train"
+replay = "auto_mechanic_agent2.main:replay"
+test = "auto_mechanic_agent2.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
