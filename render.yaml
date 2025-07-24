@@ -2,8 +2,11 @@ services:
   - type: web
     name: toyota-mechanic-agent
     runtime: python
-    buildCommand: "pip install -r requirements.txt && npm install --prefix ui && npm run build --prefix ui"
-    startCommand: "python server.py"
+    buildCommand: |
+      pip install -r requirements.txt
+      npm install --prefix ui
+      npm run build --prefix ui
+    startCommand: "gunicorn server:app"
     envVars:
       - key: PORT
         value: 5000
@@ -12,5 +15,6 @@ services:
       paths:
         - server.py
         - requirements.txt
+        - src/**
         - ui/**
         - render.yaml
