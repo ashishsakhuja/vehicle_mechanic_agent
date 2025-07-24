@@ -7,4 +7,5 @@ pydantic
 tiktoken
 langchain-pinecone
 pinecone
+gunicorn
 
