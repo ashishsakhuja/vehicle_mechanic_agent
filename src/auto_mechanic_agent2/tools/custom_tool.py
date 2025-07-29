@@ -1,7 +1,5 @@
 import os
 from typing import Any
-import duckdb
-import pandas as pd
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 from langchain_community.document_loaders import PyPDFLoader
