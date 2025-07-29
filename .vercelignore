@@ -22,3 +22,15 @@ tests/
 data/
 *.db
 .DS_Store
+*.log
+*.pdf
+*.mp4
+*.bin
+__pycache__/
+venv/
+.venv/
+*.db
+manuals/
+src/knowledge/manual_index/
+src/knowledge/manuals/
+.pkl
