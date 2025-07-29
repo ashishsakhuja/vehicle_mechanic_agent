@@ -3,9 +3,15 @@ name = "auto_mechanic_agent2"
 version = "0.1.0"
 description = "auto_mechanic_agent2 using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
-requires-python = ">=3.10,<3.13"
+requires-python = ">=3.10,<3.11"
 dependencies = [
-    "crewai[tools]>=0.120.1,<1.0.0"
+  "aiohttp==3.9.5",
+  "crewai[tools]==0.148.0",
+  "langchain-pinecone>=0.2.0",
+  "pinecone>=6.0",
+  "flask",
+  "flask-cors",
+  "duckdb>= 1.3.2",
 ]
 
 [project.scripts]
