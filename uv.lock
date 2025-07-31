@@ -446,7 +446,7 @@ wheels = [
 
 [[package]]
 name = "crewai"
-version = "0.120.1"
+version = "0.148.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "appdirs" },
