@@ -8,8 +8,7 @@ import {
   DollarSign,
   Calendar,
   Zap,
-  AlertTriangle,
-  CheckCircle
+  AlertTriangle
 } from 'lucide-react'
 
 // ─── InfoCard ────────────────────────────────────────────────────────────────
@@ -107,6 +106,7 @@ function LinksCard({ title, data = {} }) {
           <ul className="list-none pl-0 space-y-1">
             {Array.isArray(links)
               ? links.map((u,i) => {
+                  if (typeof u !== 'string') return null
                   const [href, tag] = u.split(' - ')
                   return (
                     <li key={i}>
@@ -121,7 +121,7 @@ function LinksCard({ title, data = {} }) {
                     </li>
                   )
                 })
-              : (
+              : (typeof links === 'string') && (
                 <li>
                   <a
                     href={links}
@@ -143,15 +143,22 @@ function LinksCard({ title, data = {} }) {
 
 // ─── App ─────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [query, setQuery]     = useState('')
-  const [loading, setLoading] = useState(false)
-  const [result, setResult]   = useState(null)
+  const [query, setQuery]      = useState('')
+  const [loading, setLoading]  = useState(false)
+  const [result, setResult]    = useState(null)
+
+  // Hero image state
+  const [heroImg, setHeroImg]      = useState(null)
+  const [imgLoading, setImgLoading]= useState(false)
 
   async function handleSearch() {
     if (!query.trim()) return
     setLoading(true)
     setResult(null)
+    setHeroImg(null)
+
     try {
+      // 1) Main repair query
       const res = await fetch('/api/query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -162,23 +169,53 @@ export default function App() {
         return
       }
       const data = await res.json()
+
+      // Normalize expected shapes
+      const rawShopping  = data['Looking for tools and materials?']
+      const rawResources = data['Additional resources']
+
+      const shopping  = (rawShopping && Array.isArray(rawShopping)  && typeof rawShopping[0]  === 'object') ? rawShopping[0]  : {}
+      const resources = (rawResources && Array.isArray(rawResources) && typeof rawResources[0] === 'object') ? rawResources[0] : {}
+
       setResult({
         ...data,
-        Tools:      Array.isArray(data.Tools)       ? data.Tools       : [],
-        materials: Array.isArray(data.materials)   ? data.materials   : [],
-        steps:     Array.isArray(data.steps)       ? data.steps       : [],
-        shopping:  data['Looking for tools and materials?']?.[0] ?? {},
-        resources: data['Additional resources']?.[0] ?? {}
+        Tools:     Array.isArray(data.Tools)     ? data.Tools     : [],
+        materials: Array.isArray(data.materials) ? data.materials : [],
+        steps:     Array.isArray(data.steps)     ? data.steps     : [],
+        shopping,
+        resources
       })
+
+      // 2) Kick off image generation in parallel (send ONLY the user's query)
+      setImgLoading(true)
+      const imgRes = await fetch('/api/generate-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }) // server extracts {year make model} and uses DALL·E 3
+      })
+      if (imgRes.ok) {
+        const imgData = await imgRes.json()
+        if (imgData.image_b64) {
+          setHeroImg(`data:image/png;base64,${imgData.image_b64}`)
+        } else if (imgData.image_url) {
+          setHeroImg(imgData.image_url)
+        } else if (imgData.error) {
+          console.warn('Image generation error:', imgData.message || imgData.error)
+        }
+      } else {
+        console.error('Image generation failed:', imgRes.statusText)
+      }
     } catch (e) {
       console.error(e)
     } finally {
       setLoading(false)
+      setImgLoading(false)
     }
   }
 
   const diffColor = (r) => {
-    const n = parseInt(r,10) || 0
+    if (r == null) return 'gray'
+    const n = parseInt(String(r).match(/\d+/)?.[0] ?? '0', 10)
     return n <= 3 ? 'green' : n <= 6 ? 'yellow' : 'purple'
   }
 
@@ -188,7 +225,6 @@ export default function App() {
       <header className="bg-red-700 text-white py-6 shadow">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex justify-center items-center space-x-2">
-            {/* enlarged, perfectly centered logo */}
             <img
               src="/toyota-logo.png"
               alt="Toyota Logo"
@@ -232,10 +268,31 @@ export default function App() {
         </div>
       </div>
 
-      {/* ─── RESULTS / TWO‑COLUMN LAYOUT ─────────────── */}
+      {/* ─── RESULTS / TWO-COLUMN LAYOUT ─────────────── */}
       {result && (
         <div className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="space-y-6 lg:col-span-2">
+            {/* Hero vehicle image (rectangular) */}
+            {(imgLoading || heroImg) && (
+              <div className="mb-2">
+                <div className="w-full rounded-xl overflow-hidden shadow bg-gray-100">
+                  <div className="relative" style={{ paddingTop: '42%' }}>
+                    {heroImg ? (
+                      <img
+                        src={heroImg}
+                        alt="Generated vehicle"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+                        Generating image…
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* InfoCards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <InfoCard
